@@ -1,11 +1,14 @@
 import './App.css';
+import { FilterableProductTable } from './components/FilterableProductTable';
+import { PRODUCTS } from './utils/productsAPIMock';
 
-function App() {
+const App = () => {
+  const products = PRODUCTS;
   return (
     <>
-      <h1>React Data Table App</h1>
+      <FilterableProductTable products={products} />
     </>
   );
-}
+};
 
 export default App;

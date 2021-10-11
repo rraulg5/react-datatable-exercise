@@ -1,10 +1,17 @@
-import React, { FC } from 'react';
+import { FC } from 'react';
 import { Product } from '../interfaces/Product';
+import { SearchBar } from './SearchBar';
+import { ProductTable } from './ProductTable';
 
 interface Props {
   products: Product[];
 }
 
 export const FilterableProductTable: FC<Props> = ({ products }) => {
-  return <div></div>;
+  return (
+    <>
+      <SearchBar />
+      <ProductTable products={products} />
+    </>
+  );
 };

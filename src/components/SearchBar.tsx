@@ -3,9 +3,16 @@ import { FC } from 'react';
 interface Props {
   filterText: string;
   inStockOnly: boolean;
+  onFilterTextChange: (filterText: string) => void;
+  onInStockChange: (inStockOnly: boolean) => void;
 }
 
-export const SearchBar: FC<Props> = ({ filterText, inStockOnly }) => {
+export const SearchBar: FC<Props> = ({
+  filterText,
+  inStockOnly,
+  onFilterTextChange,
+  onInStockChange,
+}) => {
   return (
     <form>
       <div className="mb-3">
@@ -14,7 +21,9 @@ export const SearchBar: FC<Props> = ({ filterText, inStockOnly }) => {
           className="form-control"
           placeholder="Search..."
           value={filterText}
-          onChange={() => {}}
+          onChange={(e) => {
+            onFilterTextChange(e.target.value);
+          }}
         />
       </div>
       <div className="mb-3 form-check">
@@ -22,7 +31,9 @@ export const SearchBar: FC<Props> = ({ filterText, inStockOnly }) => {
           type="checkbox"
           className="form-check-input"
           checked={inStockOnly}
-          onChange={() => {}}
+          onChange={(e) => {
+            onInStockChange(e.target.checked);
+          }}
         />
         <label className="form-check-label" htmlFor="exampleCheck1">
           Only show products in stock

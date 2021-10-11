@@ -4,14 +4,29 @@ import { ProductCategory } from './ProductCategoryRow';
 import { ProductRow } from './ProductRow';
 
 interface Props {
+  filterText: string;
+  inStockOnly: boolean;
+
   products: Product[];
 }
 
-export const ProductTable: FC<Props> = ({ products }) => {
+export const ProductTable: FC<Props> = ({
+  filterText,
+  inStockOnly,
+  products,
+}) => {
   const rows: ReactElement<FC>[] = [];
   let lastCategory: string | null = null;
 
   products.forEach((product) => {
+    if (
+      product.name.toLowerCase().indexOf(filterText.trim().toLowerCase()) === -1
+    ) {
+      return;
+    }
+    if (inStockOnly && !product.stocked) {
+      return;
+    }
     if (product.category !== lastCategory) {
       rows.push(
         <ProductCategory category={product.category} key={product.category} />
